@@ -18,13 +18,15 @@
 	<import resource="classpath:META-INF/cxf/cxf.xml" />
 	<import resource="classpath:META-INF/cxf/cxf-servlet.xml" />
 
-	<bean id="exampleService" class="net.jeffsbox.services.ExampleService" />
-	<jaxrs:server id="jaxRsServer">
-		<jaxrs:serviceBeans>
-			<ref bean="exampleService" />
-		</jaxrs:serviceBeans>
-	</jaxrs:server>
+	<!-- Tell CXF/JAX-RS where the REST service is defined -->
+	<!-- 
+		Specifying the address as '/' or '/something' makes sure it uses the containing app server.
+		In certain configurations, not including address causes Camel to start a Jetty instance
+		which hosts the REST service. This can cause conflicts in dependencies.
+	 -->
+	<jaxrs:server id="jaxRsServer" address="/" serviceClass="net.jeffsbox.services.ExampleService"/>
 
+	<!-- Tell Spring where the Camel routes are defined -->
 	<bean id="camelRoutes" class="net.jeffsbox.routes.Routes"/>
 	<camel:camelContext trace="true">
 		<camel:routeBuilder ref="camelRoutes" />
