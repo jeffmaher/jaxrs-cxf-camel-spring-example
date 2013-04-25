@@ -22,7 +22,12 @@ An example call:
 
 ## Service Defintion
 
-`net.jeffsbox.services.ExampleService` is simply the defintion of the service.
+`net.jeffsbox.services.ExampleService` is simply the defintion of the REST service.
+
+## Bean Configuration
+
+`src/main/resources/spring/applicationContext.xml` defines the JAX-RS/CXF REST service bean 
+and where the Camel routes are defined. 
 
 ## Camel Route
 
